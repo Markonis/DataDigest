@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DataDigest</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="/plugins/iCheck/flat/blue.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="/plugins/datepicker/datepicker3.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker-bs3.css">
+
+  <link rel="stylesheet" type="text/css" href="/assets/util.css">
+  <!-- Charts -->
+  <link rel="stylesheet" type="text/css" href="/assets/charts/barChart.css">
+  <link rel="stylesheet" type="text/css" href="/assets/charts/seriesChart.css">
+  <link rel="stylesheet" type="text/css" href="/assets/charts/pieChart.css">
+  <link rel="stylesheet" type="text/css" href="/assets/charts/seriesDateChart.css">
+  <link rel="stylesheet" type="text/css" href="/assets/charts/circlePackChart.css">
+  <link rel="stylesheet" type="text/css" href="/assets/charts/d3.tip.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="/https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="/https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition skin-purple-light sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="/#" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>D</b>D</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Data</b>Digest</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="/#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+  
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="/dist/img/avatar04.png" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>Administrator</p>
+        </div>
+      </div>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="click">
+          <a href="<%= uploads_path %>">
+            <i class="fa fa-cloud-upload"></i> <span>Upload Raw Data</span>
+          </a>
+        </li>
+        <li class="click">
+          <a href="<%= groups_path %>">
+            <i class="fa fa-object-group"></i> <span>Groups</span>
+          </a>
+        </li>
+        <li class="click">
+          <a href="<%= classifications_path %>">
+            <i class="fa fa-cogs"></i> <span>Analyse Data</span>
+          </a>
+        </li> 
+        <li>
+          <a href="<%= presentations_path %>">
+            <i class="fa fa-line-chart"></i> <span>Plot Data</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+      
+      <!-- jQuery 2.1.4 -->
+      <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+      <!-- D3 -->
+      <script src="/assets/d3.v3.min.js"></script>
+      <script src="/assets/charts/d3.tip.js"></script>      
+      <!-- Chart Factory -->
+      <script src="/assets/charts/chartFactory.js"></script>
+      <!-- Custom js for different types of charts -->
+      <script src="/assets/charts/seriesChart.js"></script>
+      <script src="/assets/charts/barChart.js"></script>
+      <script src="/assets/charts/pieChart.js"></script>
+      <script src="/assets/charts/seriesDateChart.js"></script>
+      <script src="/assets/charts/circlePackChart.js"></script>
+      
+      <%= yield %>
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    Copyright &copy; 2016. All rights reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+  
+<!-- Bootstrap 3.3.5 -->
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<!-- datepicker -->
+<script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- Slimscroll -->
+<script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/dist/js/demo.js"></script>
+
+
+
+
+<script>
+  var $li = $('li.click').click(function() {
+   $(this).parentElement.find("li.active").removeClass("active");
+   // $li.siblings().removeClass('active');
+    $(this).addClass('active');
+});
+</script>
+
+</body>
+</html>
+
+
+

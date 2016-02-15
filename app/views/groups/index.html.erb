@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Listing Groups</h3>
+   
+  </div>
+  <div class="box-body">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Attributes</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @groups.each do |group| %>
+          <tr>
+            <td><%= group.name %></td>
+            <td><%= group.data_attributes.join(', ') %></td>
+            <td><%= group.description %></td>
+            <td class="text-right"><%= link_to 'Show', group, :class => "btn btn-flat btn-info margin-sm" %> <%= link_to 'Edit', edit_group_path(group), :class => "btn btn-flat btn-warning margin-sm" %> <%= button_to 'Destroy', group, method: :delete, :class => "btn btn-flat btn-danger margin-sm" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>  
+  </div>
+</div>

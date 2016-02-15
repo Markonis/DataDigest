@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<div class="box">
+  <div class="box-header">
+    <h4 class="box-title">Listing Classifications</h4>
+    <%= link_to 'New Classification', new_classification_path, :class => "btn btn-flat bg-purple pull-right" %>
+  </div>
+  <div class="box-body">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Threshold</th>
+          <th>Limit</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @classifications.each do |classification| %>
+          <tr>
+            <td><%= classification.description %></td>
+            <td><%= classification.threshold %></td>
+            <td><%= classification.limit.zero? ? "none" :classification.limit %></td>
+            <td class="text-right"><%= link_to 'Show', classification, :class => "btn btn-info btn-flat margin-sm" %> <%= button_to 'Destroy', classification, method: :delete, :class => "btn btn-danger btn-flat margin-sm" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>  
+  </div>
+</div>

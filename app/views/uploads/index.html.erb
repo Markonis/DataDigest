@@ -1,0 +1,33 @@
+<div class="box">
+  <div class="box-header">
+    <h4 class="box-title">Listing Uploads</h4>
+    <%= link_to 'New Upload', new_upload_path, :class => "btn bg-purple btn-flat pull-right" %>
+  </div>
+  <div class="box-body">
+    <p id="notice"><%= notice %></p>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Filename</th>
+            <th>Content Type</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @uploads.each do |upload| %>
+            <tr>
+              <td><%= upload.filename %></td>
+              <td><%= upload.content_type %></td>
+              <td><%= link_to 'Show', upload, :class => "btn btn-info btn-flat margin-sm" %> <%= link_to 'Edit', edit_upload_path(upload), :class => "btn btn-warning btn-flat margin-sm" %> <%= button_to 'Destroy', upload, method: :delete, :class => "btn btn-info btn-danger margin-sm" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>  
+    </div>
+  </div>
+</div>
+
+
+
+

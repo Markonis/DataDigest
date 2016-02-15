@@ -1,0 +1,50 @@
+<%= form_for(@classification) do |f| %>
+  <% if @classification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@classification.errors.count, "error") %> prohibited this classification from being saved:</h2>
+
+      <ul>
+      <% @classification.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+ 
+<div class="row">
+  <div class="fields col-md-6">
+    <div class="field form-group">
+      <%= f.label :description, "Description :" %>
+      <%= f.text_area :description, :class =>"form-control height100"%>
+    </div>
+    <div class="field form-group">
+      <%= f.label :threshold, "Similarity threshold :" %>
+      <%= f.number_field :threshold, max:100,min:0, :class =>"form-control"%>
+    </div>
+    <div class="form-group">
+      <input type="checkbox" class="limit" > Define max number of entities
+      <br>
+      <%= f.number_field :limit, min:0, max:9000,:id=>"limit", :disabled => true, :class =>"form-control"%>
+    </div>
+  </div>
+</div>
+
+<div class="form-group text-right">
+    <%= f.submit "Start classification",:class => "btn btn-primary btn-flat bg-purple margin-sm btn-md",:id=>"submit"%>
+</div>
+ 
+ 
+ <script>
+   
+  $(".limit").change(function() 
+  {
+      var field=document.getElementById("limit");
+      field.disabled=!this.checked;
+    
+      field.value= this.checked ? "" : 0
+   
+  });
+ </script>
+  
+<% end %>

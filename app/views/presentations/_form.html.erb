@@ -1,0 +1,101 @@
+<%= form_for(@presentation) do |f| %>
+  <% if @presentation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@presentation.errors.count, "error") %> prohibited this presentation from being saved:</h2>
+      <ul>
+      <% @presentation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, :class => "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :type %>
+    <input type="text" value="<%= @presentation.type %>" class="form-control" readonly/>
+<!--    <%= f.select :type, options_for_select([["Series Chart", "series"], ["Pie Chart", "pie"]]), {}, :class => "form-control" %> -->
+  </div>
+  <%= f.fields_for :fetch_config do |fcf| %>
+    <div class="form-group">
+      <%= fcf.label :group_id %>
+      <%= fcf.select :group_id, options_for_select(group_options), {}, id: "groupSelect", :class => "form-control" %>
+    </div>
+  <% end %>
+  <%= f.fields_for :display_config do |dcf| %>
+    <div class="form-group">
+      <label>Independent attribute</label><%= dcf.select :attribute_x, options_for_select({}), {}, id: "indepAttrSelect", :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <label>Dependent attribute</label>
+      <%= dcf.select :attribute_y, options_for_select({}), {}, id: "depAttrSelect", :class => "form-control" %>
+    </div>
+  <% end %>
+  <div class="form-group text-right">
+    <%= f.submit :class => "btn btn-primary btn-flat bg-purple" %>
+  </div>
+<% end %>
+
+<script>
+  String.prototype.replaceAll = function(target, replacement) {
+    return this.split(target).join(replacement);
+  };
+  
+  var groups = [];
+  
+  <% @groups.each do |g| %>
+  
+    groups.push({
+      id:  "<%= g.id %>",
+      attributes: <%= g.data_attributes.to_json.html_safe %>,
+      entities: <%= g.entities.to_json.html_safe %>
+    });
+    
+  <% end %>
+  
+  console.log(groups[0].entities)
+  
+  var groupSelectVal = $("#groupSelect").val();
+  
+  filterCurrentGroup = function(value, index){
+                            if(value.id == groupSelectVal)
+                              return true;
+                            else
+                              return false;
+                          };
+  
+                      
+  var activeGroup = groups.filter(filterCurrentGroup);
+  
+  updateAttributes = function(){
+                        $('#depAttrSelect')
+                          .find('option')
+                          .remove()
+                        $('#indepAttrSelect')
+                          .find('option')
+                          .remove()
+                        activeGroup[0].attributes.forEach(function(el){
+                          
+                          var test = parseFloat(activeGroup[0].entities[0].data[el]);
+                          
+                          if(!isNaN(test)){
+                            $("#depAttrSelect").append($("<option></option>")
+                                 .attr("value",el)
+                                 .text(el));
+                            $("#indepAttrSelect").append($("<option></option>")
+                                 .attr("value",el)
+                                 .text(el));
+                          }
+                        });
+                      }
+                    
+  updateAttributes();                    
+                    
+  $("#groupSelect").change(function(){
+    groupSelectVal = $("#groupSelect").val();
+    activeGroup = groups.filter(filterCurrentGroup);
+    updateAttributes();
+  });
+</script>

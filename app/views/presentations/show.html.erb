@@ -1,0 +1,24 @@
+<div class="box">
+  <div class="box-header">
+    <h4 class="box-title"><%= presentation_title(@presentation) %></h4>
+  </div>
+  <div class="box-body">
+    <p id="notice" class="margin-md"><%= notice %></p>
+    <div id="showPresentationDiv" class="overflow-x"></div>
+  </div>
+  <div class="box-footer text-right">
+    <%= link_to 'Back', presentations_path, :class => "btn btn-flat btn-default" %>
+  </div>
+</div>
+
+<script>
+  var element = {
+    type: "<%= @presentation.type %>",
+    attrX: "<%= @presentation.display_config[:attribute_x] %>",
+    attrY: "<%= @presentation.display_config[:attribute_y] %>",
+    data: <%= @presentation.data.to_json.html_safe %>
+  }
+  
+  var chart = cf.create(element, "showPresentationDiv")
+  chart.draw()
+</script>

@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+<div class="box">
+  <div class="box-header with-border">
+    <h2 class="box-title">Classification Results</h2>
+    <div class="box-tools">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+      <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+    </div>
+  </div>
+  <div class="box-body">
+    <div class="row">
+      <div class="col-md-6">
+        <p>
+          <strong>Description:</strong>
+          <%= @classification.description %>
+        </p>
+        <p>
+          <strong>Threshold:</strong>
+          <%= @classification.threshold %>
+        </p>
+        <p>
+          <% if( @classification.limit? && !@classification.limit.zero?) %>
+          <strong>Limit:</strong>
+          <%= @classification.limit %>
+          <%end%>
+        </p>
+        <hr>
+        <p>
+          <% @classification.result_groups.each do |group| %>
+            <div class="form-group">
+              <h5 class="purple"><strong><%= group[:name] %></strong></h5>
+              <div><label>Size:&nbsp </label><%= group[:size] %></div>
+              <div><label>Attributes:&nbsp </label><%= group[:data_attributes].join(', ') %></div>
+              <% if(group[:description]) %>
+              <div><label>Description:&nbsp </label><%= group[:description] %></div>
+              <% end %>
+            </div>
+          <% end %>
+        </p>
+      </div>
+      <div class="col-md-6 table-responsive">
+        <div id="circlePackChart" class="oveflow-x"></div>
+      </div>
+    </div>
+  </div>
+  <div class="box-footer text-right">
+    <%= link_to 'Back', classifications_path, class: ['btn', 'btn-default'] %>
+  </div>
+</div>
+
+<script>
+
+  var children = <%= @classification.result_groups.to_json.html_safe %>;
+  
+  if(children != null && children.hasOwnProperty("length") && children.length > 0){
+    var chart_config = {
+      type: 'pack',
+      data: {
+        name: 'root',
+        children: children, 
+        size: 16000
+      }
+    };
+    
+    var chart = cf.create(chart_config, 'circlePackChart');
+    chart.draw();
+  }else
+    $("#circlePackChart").append("There are no groups which could be created with this classification.")
+</script>
+
+

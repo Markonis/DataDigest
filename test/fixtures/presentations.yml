@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  data: MyString
+  fetch_strategy: MyString
+  display_strategy: MyString
+
+two:
+  type: 
+  data: MyString
+  fetch_strategy: MyString
+  display_strategy: MyString

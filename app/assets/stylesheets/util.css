@@ -1,0 +1,52 @@
+.height100{
+    height:100px!important;
+}
+
+.margin-lg{
+    margin: 15px;
+}
+
+.margin-md{
+    margin: 10px;
+}
+
+.margin-sm{
+    margin: 5px;
+}
+
+.opacity25{
+    opacity: 0.25;
+}
+
+.overflow-x{
+    overflow-x: scroll;
+}
+
+.overflow-y{
+    overflow-y: scroll;
+}
+
+.padded-bottom-md{
+    padding-bottom: 10px;
+}
+
+.purple{
+    color: #605ca8;
+}
+
+/** ELEMENTS **/
+
+textarea{
+    resize: none;
+}
+
+/*** FIXES **/
+
+.button_to{
+    display: inline-block;
+}
+
+.clicked_li
+{
+    background-color: gray;
+}
